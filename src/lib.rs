@@ -1,5 +1,4 @@
-//! # `simd_cesu8`
-
+#![doc = include_str!("README.md")]
 #![cfg_attr(
     feature = "nightly",
     feature(array_chunks, portable_simd, error_in_core)

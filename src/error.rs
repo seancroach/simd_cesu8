@@ -24,4 +24,5 @@ impl fmt::Display for DecodingError {
     }
 }
 
+#[cfg(any(feature = "nightly", feature = "std"))]
 impl error::Error for DecodingError {}
