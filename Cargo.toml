@@ -70,9 +70,20 @@ name = "simd_cesu8"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
+rust-version = "1.79.0"
+description = "An extremely fast, SIMD accelerated, encoding and decoding library for CESU-8 and Modified UTF-8."
 homepage = "https://github.com/seancroach/simd_cesu8"
 repository = "https://github.com/seancroach/simd_cesu8"
-rust-version = "1.79.0"
+license = "Apache-2.0 OR MIT"
+keywords = ["cesu8", "decode", "encode", "mutf8", "no_std"]
+categories = ["encoding", "no-std"]
+
+include = [
+    "/src",
+    "LICENSE-APACHE",
+    "LICENSE-MIT",
+]
+
 build = "build.rs"
 
 ################################################################################
@@ -173,3 +184,11 @@ harness = false
 
 [profile.bench]
 debug = true
+
+################################################################################
+# Docs.rs Configuration
+################################################################################
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "doc_cfg"]

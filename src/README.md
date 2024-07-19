@@ -1,8 +1,30 @@
-~~# `simd_cesu8`
+# `simd_cesu8` &emsp; [![Build Status]][simd-cesu8] [![Crates.io Version]][crates-io] ![Crates.io MSRV] ![License Badge]
 
-An extremely fast encoding and decoding library
+[Build Status]: https://img.shields.io/github/actions/workflow/status/seancroach/simd_cesu8/ci.yml
+
+[simd-cesu8]: https://github.com/seancroach/simd_cesu8
+
+[Crates.io Version]: https://img.shields.io/crates/v/simd_cesu8
+
+[crates-io]: https://crates.io/crates/simd_cesu8
+
+[Crates.io MSRV]: https://img.shields.io/crates/msrv/simd_cesu8
+
+[License Badge]: https://img.shields.io/badge/license-Apache_2.0%20OR%20MIT-blue
+
+An extremely fast, SIMD-accelerated, encoding and decoding library
 for [CESU-8](https://en.wikipedia.org/wiki/UTF-8#CESU-8) and [Modified
 UTF-8](https://en.wikipedia.org/wiki/UTF-8#Modified_UTF-8).
+
+## Features
+
+- Extremely fast encoding and decoding of CESU-8 and Modified UTF-8.
+- Supports lossy decoding of CESU-8 and MUTF-8.
+- Supports strict decoding of CESU-8 and MUTF-8.
+- Up to 25 times faster than known alternatives when encoding.
+- Up to 14 times faster than known alternatives when decoding.
+- Supports AVX 2 and SSE 4.2 implementations on x86 and x86-64.
+- No-std support.
 
 ## Usage
 
@@ -14,11 +36,25 @@ version = "1"
 features = ["nightly"]
 ```
 
+## MSRV
+
+The minimum supported Rust version is 1.79.0.
+
 ## Benchmarks
 
-These benchmarks are run on an AMD Ryzen 9 Z950X3D on WSL2 with Rust
+These benchmarks are run on an AMD Ryzen 9 7950X3D on WSL2 with Rust
 1.81.0-nightly. Each of the operations were measured with an input exactly equal
-to 16,380 bytes.
+to 16,380 bytes. Data sets were randomly generated with the same seed for each
+operation. Each set contained 1,000 values, that were endlessly repeated as
+input. The benchmarks were run with the [`criterion`] crate. The tables got
+created via [`critcmp`]. The source code for the benchmarks can be found in the
+`benches` directory. Any call to `simd_cesu8` was replaces with the `cesu8`
+equivalent when collecting the data for the `cesu8` benchmarks. The data
+collected can also be found in the `benches` directory.
+
+[`criterion`]: https://github.com/bheisler/criterion.rs
+
+[`critcmp`]: https://github.com/BurntSushi/critcmp
 
 ### Encoding
 
@@ -145,7 +181,7 @@ faster than `cesu8::to_java_cesu8`. But, the pitfalls are equally the same, as
 surrogate pairs. The other catch is that we're slightly slower than `cesu8` when
 decoding null bytes. The same reasoning applies here, as the overhead is higher.
 
-### Thanks
+## Thanks
 
 - To the authors of the [`cesu8`] library. It's a genuinely good library that
   helped me years ago learn some more complex Rust concepts.
@@ -158,3 +194,22 @@ decoding null bytes. The same reasoning applies here, as the overhead is higher.
 [`simdutf8`]: https://github.com/rusticstuff/simdutf8
 
 [`simdnbt`]: https://github.com/azalea-rs/simdnbt
+
+## License
+
+Licensed under either of
+
+- Apache License, Version 2.0
+  ([LICENSE-APACHE](https://github.com/seancroach/simd_cesu8/blob/main/LICENSE-APACHE)
+  or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license
+  ([LICENSE-MIT](https://github.com/seancroach/simd_cesu8/blob/main/LICENSE-MIT)
+  or http://opensource.org/licenses/MIT)
+
+at your option.
+
+## Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.
