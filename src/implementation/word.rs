@@ -49,7 +49,7 @@ fn word_contains_null_byte(word: usize) -> bool {
 #[must_use]
 #[inline]
 const fn usize_repeat_u8(byte: u8) -> usize {
-    usize::from_ne_bytes([0x01; USIZE_SIZE])
+    usize::from_ne_bytes([byte; USIZE_SIZE])
 }
 
 /// This is an optimized test that will use usize-at-a-time operations instead

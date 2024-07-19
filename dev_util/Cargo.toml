@@ -1,0 +1,29 @@
+[package]
+name = "dev_util"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+publish = false
+
+################################################################################
+# Lints
+################################################################################
+
+[lints]
+workspace = true
+
+################################################################################
+# Dependencies
+################################################################################
+
+[dependencies.criterion]
+workspace = true
+
+[dependencies.rand]
+workspace = true
+
+[dependencies.rand_xoshiro]
+workspace = true
+
+[dependencies.cesu8]
+workspace = true
