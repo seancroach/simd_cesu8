@@ -8,7 +8,7 @@ resolver = "2"
 
 [workspace.package]
 # Be sure to update the version number in `README.md`.
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Sean C. Roach <me@seancroach.dev>"]
 edition = "2021"
 
