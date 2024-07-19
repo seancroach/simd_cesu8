@@ -24,7 +24,7 @@ alloc_instead_of_core = "deny"
 doc_markdown = "allow"
 missing_safety_doc = "deny"
 multiple_unsafe_ops_per_block = "deny"
-pedantic = "deny"
+pedantic = { level = "deny", priority = -1 }
 std_instead_of_alloc = "deny"
 std_instead_of_core = "deny"
 undocumented_unsafe_blocks = "deny"
