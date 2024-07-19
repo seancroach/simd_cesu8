@@ -1,4 +1,7 @@
-//! TODO
+//! A module for encoding and decoding Modified UTF-8 (MUTF-8), a variant of
+//! CESU-8 that encodes the null character (`0x00`) as two bytes: `0xc0` and
+//! `0x80`. In general, this module is nearly identical to the functions found
+//! in the root of this crate.
 
 use alloc::borrow::Cow;
 

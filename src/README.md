@@ -40,6 +40,10 @@ It is extremely recommended to use the nightly feature, as it enables the
 fastest implementations of the library. If you don't want to use nightly, you
 can remove the feature and the library will still work, but will be slower.
 
+## Documentation
+
+The documentation can be found on [docs.rs](https://docs.rs/simd_cesu8).
+
 ## MSRV
 
 The minimum supported Rust version is 1.79.0.
