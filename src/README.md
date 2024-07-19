@@ -36,13 +36,17 @@ version = "1"
 features = ["nightly"]
 ```
 
+It is extremely recommended to use the nightly feature, as it enables the
+fastest implementations of the library. If you don't want to use nightly, you
+can remove the feature and the library will still work, but will be slower.
+
 ## MSRV
 
 The minimum supported Rust version is 1.79.0.
 
 ## Benchmarks
 
-These benchmarks are run on an AMD Ryzen 9 7950X3D on WSL2 with Rust
+These benchmarks were run with an AMD Ryzen 9 7950X3D on WSL2 with Rust
 1.81.0-nightly. Each of the operations were measured with an input exactly equal
 to 16,380 bytes. Data sets were randomly generated with the same seed for each
 operation. Each set contained 1,000 values, that were endlessly repeated as
