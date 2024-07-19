@@ -78,13 +78,6 @@ license = "Apache-2.0 OR MIT"
 keywords = ["cesu8", "decode", "encode", "mutf8", "no_std"]
 categories = ["encoding", "no-std"]
 
-include = [
-    "/benches",
-    "/src",
-    "LICENSE-APACHE",
-    "LICENSE-MIT",
-]
-
 build = "build.rs"
 
 ################################################################################
