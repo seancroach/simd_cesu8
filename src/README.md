@@ -50,7 +50,7 @@ with the datasets used to benchmark the encoding operations:
 
 #### `simd_cesu8::encode`
 
-![encode_cesu8](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/encode_cesu8.png)
+![Encode CESU-8 Benchmarks](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/encode_cesu8.png)
 
 `simd_cesu8::encode` is around %2,500 faster than `cesu8::to_cesu8` in optimal
 conditions. In suboptimal conditions, `simd_cesu8::encode` is around %50 faster
@@ -62,7 +62,7 @@ tiny optimizations that add up to a significant speedup.
 
 #### `simd_cesu8::mutf8::encode`
 
-![encode_mutf8](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/encode_mutf8.png)
+![Encode MUTF-8 Benchmarks](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/encode_mutf8.png)
 
 Similar to `simd_cesu8::encode`, `simd_cesu8::mutf8::encode` is around %1800
 faster than `cesu8::to_java_cesu8` in optimal conditions. In suboptimal
@@ -124,7 +124,7 @@ with the datasets used to benchmark the decoding operations:
 
 #### `simd_cesu8::decode`
 
-![decode_cesu8](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/decode_cesu8.png)
+![Decode CESU-8 Benchmarks](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/decode_cesu8.png)
 
 In optimal conditions, `simd_cesu8::decode` can be around %1,400 faster than
 `cesu8::to_cesu8`. However, `simd_cesu8::decode` is slower
@@ -137,7 +137,7 @@ requirement for a library to be fast.
 
 #### `simd_cesu8::mutf8::decode`
 
-![decode_mutf8](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/decode_mutf8.png)
+![Decode MUTF-8 Benchmarks](https://raw.githubusercontent.com/seancroach/simd_cesu8/main/img/decode_mutf8.png)
 
 Much like `simd_cesu8::decode`, `simd_cesu8::mutf8::decode` can be around %1,400
 faster than `cesu8::to_java_cesu8`. But, the pitfalls are equally the same, as
