@@ -28,7 +28,7 @@ UTF-8](https://en.wikipedia.org/wiki/UTF-8#Modified_UTF-8).
 
 ## Usage
 
-Add this to your `Cargo.toml`:
+Add this to your `Cargo.toml` file:
 
 ```toml
 [dependencies.simd_cesu8]
@@ -56,9 +56,14 @@ to 16,380 bytes. Data sets were randomly generated with the same seed for each
 operation. Each set contained 1,000 values, that were endlessly repeated as
 input. The benchmarks were run with the [`criterion`] crate. The tables got
 created via [`critcmp`]. The source code for the benchmarks can be found in the
-`benches` directory. Any call to `simd_cesu8` was replaces with the `cesu8`
+`benches` directory. Any call to `simd_cesu8` was replaced with the `cesu8`
 equivalent when collecting the data for the `cesu8` benchmarks. The data
 collected can also be found in the `benches` directory.
+
+We compare `simd_cesu8` to the [`cesu8`] library, as it's the most popular
+library for CESU-8 and MUTF-8 encoding and decoding in Rust. I originally
+started this project, however, because there's a few minor semantic errors in
+the `cesu8` library that I wanted to fix myself.
 
 [`criterion`]: https://github.com/bheisler/criterion.rs
 
