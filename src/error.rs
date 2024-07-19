@@ -25,5 +25,5 @@ impl fmt::Display for DecodingError {
 }
 
 #[cfg(any(feature = "nightly", feature = "std"))]
-#[cfg_attr(doc_cfg, doc(cfg(any(feature = "nightly", feature = "std"))))]
+#[cfg_attr(docsrs, doc(cfg(any(feature = "nightly", feature = "std"))))]
 impl error::Error for DecodingError {}

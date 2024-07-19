@@ -7,7 +7,7 @@
 // toolchain.
 #![cfg_attr(feature = "nightly", allow(stable_features))]
 #![cfg_attr(not(feature = "std"), no_std)]
-#![cfg_attr(doc_cfg, feature(doc_cfg))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 
 extern crate alloc;
 
