@@ -72,7 +72,7 @@ authors.workspace = true
 edition.workspace = true
 homepage = "https://github.com/seancroach/simd_cesu8"
 repository = "https://github.com/seancroach/simd_cesu8"
-rust-version = "1.59.0"
+rust-version = "1.79.0"
 build = "build.rs"
 
 ################################################################################
