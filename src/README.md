@@ -19,11 +19,16 @@ UTF-8](https://en.wikipedia.org/wiki/UTF-8#Modified_UTF-8).
 ## Features
 
 - Extremely fast encoding and decoding of CESU-8 and Modified UTF-8.
+- Only allocates memory when absolutely necessary. Zero reallocations.
 - Supports lossy decoding of CESU-8 and MUTF-8.
 - Supports strict decoding of CESU-8 and MUTF-8.
 - Up to 25 times faster than known alternatives when encoding.
 - Up to 14 times faster than known alternatives when decoding.
 - Supports AVX 2 and SSE 4.2 implementations on x86 and x86-64.
+- ARM64 (aarch64) SIMD is supported.
+- WASM (wasm32) SIMD is supported.
+- PowerPC (powerpc) SIMD is (partially) supported.
+- Falls back to word-at-a-time implementations instead of byte-at-a-time.
 - No-std support.
 
 ## Usage
@@ -43,6 +48,9 @@ can remove the feature and the library will still work, but will be slower.
 ## Documentation
 
 The documentation can be found on [docs.rs](https://docs.rs/simd_cesu8).
+
+For quick access to certain functions, I highly recommend pressing the "All
+Items" button in the top left corner of the documentation page.
 
 ## MSRV
 
