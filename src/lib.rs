@@ -4,13 +4,18 @@
     feature = "nightly",
     feature(array_chunks, portable_simd, error_in_core)
 )]
+// NOTE: We use this to prevent false positives when using the nightly
+// toolchain.
+#![cfg_attr(feature = "nightly", allow(stable_features))]
 #![cfg_attr(not(feature = "std"), no_std)]
-mod error;
-mod implementation;
-mod internal;
-pub mod mutf8;
 
 extern crate alloc;
+
+mod error;
+#[doc(hidden)]
+pub mod implementation;
+mod internal;
+pub mod mutf8;
 
 use alloc::borrow::Cow;
 
