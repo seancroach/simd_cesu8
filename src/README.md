@@ -1,4 +1,4 @@
-# `simd_cesu8` &emsp; [![Build Status]][simd-cesu8] [![Crates.io Version]][crates-io] ![Crates.io MSRV] ![License Badge]
+# `simd_cesu8` &emsp; [![Build Status]][simd-cesu8] [![Crates.io Version]][crates-io] ![Crates.io MSRV]
 
 [Build Status]: https://img.shields.io/github/actions/workflow/status/seancroach/simd_cesu8/ci.yml
 
@@ -9,8 +9,6 @@
 [crates-io]: https://crates.io/crates/simd_cesu8
 
 [Crates.io MSRV]: https://img.shields.io/crates/msrv/simd_cesu8
-
-[License Badge]: https://img.shields.io/badge/license-Apache_2.0%20OR%20MIT-blue
 
 An extremely fast, SIMD-accelerated, encoding and decoding library
 for [CESU-8](https://en.wikipedia.org/wiki/UTF-8#CESU-8) and [Modified
