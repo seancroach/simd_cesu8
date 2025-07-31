@@ -1,8 +1,5 @@
 #![doc = include_str!("README.md")]
-#![cfg_attr(
-    feature = "nightly",
-    feature(array_chunks, portable_simd, error_in_core)
-)]
+#![cfg_attr(feature = "nightly", feature(portable_simd, error_in_core))]
 // NOTE: We use this to prevent false positives when using the nightly
 // toolchain.
 #![cfg_attr(feature = "nightly", allow(stable_features))]
