@@ -232,7 +232,7 @@ pub(crate) fn encode(value: &str, flavor: Flavor) -> Vec<u8> {
                 encoded.extend_from_slice(&[0xc0, 0x80]);
             } else {
                 encoded.push(first);
-            };
+            }
 
             index += 1;
         } else if first <= 0xdf {
@@ -266,7 +266,7 @@ pub(crate) fn encode(value: &str, flavor: Flavor) -> Vec<u8> {
             encoded.extend_from_slice(&encode_surrogate(s1));
             encoded.extend_from_slice(&encode_surrogate(s2));
             index += 4;
-        };
+        }
     }
 
     encoded
