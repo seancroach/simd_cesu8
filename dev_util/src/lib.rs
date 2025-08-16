@@ -4,7 +4,7 @@
 // because they are used in benchmarks, typical debug assertions would never
 // trigger.
 #![allow(clippy::missing_panics_doc)]
-#![feature(iter_intersperse, iter_repeat_n)]
+#![feature(iter_intersperse)]
 
 extern crate alloc;
 

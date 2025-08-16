@@ -1,5 +1,5 @@
 #![doc = include_str!("README.md")]
-#![cfg_attr(feature = "nightly", feature(portable_simd, error_in_core))]
+#![cfg_attr(feature = "nightly", feature(portable_simd))]
 // NOTE: We use this to prevent false positives when using the nightly
 // toolchain.
 #![cfg_attr(feature = "nightly", allow(stable_features))]
@@ -108,7 +108,7 @@ use self::internal::{DecodeOptions, Flavor};
 /// ```
 #[must_use]
 #[inline]
-pub fn decode_lossy_strict(bytes: &[u8]) -> Cow<str> {
+pub fn decode_lossy_strict(bytes: &[u8]) -> Cow<'_, str> {
     if contains_utf8_4_byte_char_header(bytes) || from_utf8(bytes).is_err() {
         let result = internal::decode(bytes, DecodeOptions {
             flavor: Flavor::Cesu8,
@@ -210,7 +210,7 @@ pub fn decode_lossy_strict(bytes: &[u8]) -> Cow<str> {
 /// ```
 #[must_use]
 #[inline]
-pub fn decode_lossy(bytes: &[u8]) -> Cow<str> {
+pub fn decode_lossy(bytes: &[u8]) -> Cow<'_, str> {
     if let Ok(string) = from_utf8(bytes) {
         Cow::Borrowed(string)
     } else {
@@ -292,7 +292,7 @@ pub fn decode_lossy(bytes: &[u8]) -> Cow<str> {
 /// assert!(result.is_err());
 /// ```
 #[inline]
-pub fn decode_strict(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
+pub fn decode_strict(bytes: &[u8]) -> Result<Cow<'_, str>, DecodingError> {
     if contains_utf8_4_byte_char_header(bytes) || from_utf8(bytes).is_err() {
         let string = internal::decode(bytes, DecodeOptions {
             flavor: Flavor::Cesu8,
@@ -382,7 +382,7 @@ pub fn decode_strict(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
 /// # }
 /// ```
 #[inline]
-pub fn decode(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
+pub fn decode(bytes: &[u8]) -> Result<Cow<'_, str>, DecodingError> {
     if let Ok(string) = from_utf8(bytes) {
         Ok(Cow::Borrowed(string))
     } else {
@@ -448,7 +448,7 @@ pub fn decode(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
 /// ```
 #[must_use]
 #[inline]
-pub fn encode(value: &str) -> Cow<[u8]> {
+pub fn encode(value: &str) -> Cow<'_, [u8]> {
     if needs_encoded(value) {
         Cow::Owned(internal::encode(value, Flavor::Cesu8))
     } else {

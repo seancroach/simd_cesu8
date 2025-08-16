@@ -1,8 +1,4 @@
-#[cfg(all(feature = "nightly", not(feature = "std")))]
-use core::error;
-use core::fmt;
-#[cfg(feature = "std")]
-use std::error;
+use core::{error, fmt};
 
 /// A zero-sized type that represents an error that occurred while decoding.
 ///
@@ -24,6 +20,4 @@ impl fmt::Display for DecodingError {
     }
 }
 
-#[cfg(any(feature = "nightly", feature = "std"))]
-#[cfg_attr(docsrs, doc(cfg(any(feature = "nightly", feature = "std"))))]
 impl error::Error for DecodingError {}

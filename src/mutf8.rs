@@ -104,7 +104,7 @@ use crate::internal::{DecodeOptions, Flavor};
 /// ```
 #[must_use]
 #[inline]
-pub fn decode_lossy_strict(bytes: &[u8]) -> Cow<str> {
+pub fn decode_lossy_strict(bytes: &[u8]) -> Cow<'_, str> {
     if contains_null_or_utf8_4_byte_char_header(bytes) || from_utf8(bytes).is_err() {
         let result = internal::decode(bytes, DecodeOptions {
             flavor: Flavor::Mutf8,
@@ -213,7 +213,7 @@ pub fn decode_lossy_strict(bytes: &[u8]) -> Cow<str> {
 /// ```
 #[must_use]
 #[inline]
-pub fn decode_lossy(bytes: &[u8]) -> Cow<str> {
+pub fn decode_lossy(bytes: &[u8]) -> Cow<'_, str> {
     if let Ok(string) = from_utf8(bytes) {
         Cow::Borrowed(string)
     } else {
@@ -300,7 +300,7 @@ pub fn decode_lossy(bytes: &[u8]) -> Cow<str> {
 /// assert!(result.is_err());
 /// ```
 #[inline]
-pub fn decode_strict(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
+pub fn decode_strict(bytes: &[u8]) -> Result<Cow<'_, str>, DecodingError> {
     if contains_null_or_utf8_4_byte_char_header(bytes) || from_utf8(bytes).is_err() {
         let string = internal::decode(bytes, DecodeOptions {
             flavor: Flavor::Mutf8,
@@ -396,7 +396,7 @@ pub fn decode_strict(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
 /// # }
 /// ```
 #[inline]
-pub fn decode(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
+pub fn decode(bytes: &[u8]) -> Result<Cow<'_, str>, DecodingError> {
     if let Ok(value) = from_utf8(bytes) {
         Ok(Cow::Borrowed(value))
     } else {
@@ -468,7 +468,7 @@ pub fn decode(bytes: &[u8]) -> Result<Cow<str>, DecodingError> {
 /// );
 #[must_use]
 #[inline]
-pub fn encode(value: &str) -> Cow<[u8]> {
+pub fn encode(value: &str) -> Cow<'_, [u8]> {
     if contains_null_or_utf8_4_byte_char_header(value.as_bytes()) {
         Cow::Owned(internal::encode(value, Flavor::Mutf8))
     } else {
