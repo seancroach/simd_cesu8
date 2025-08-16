@@ -115,8 +115,8 @@ default = ["std"]
 # are enabled, so we can benchmark them.
 bench = []
 
-# The `nightly` feature enables nightly-only features like `array_chunks` and
-# `portable_simd`. This is automatically enabled if the compiler is nightly.
+# The `nightly` feature enables nightly-only features like `portable_simd`.
+# This is automatically enabled if the compiler is nightly.
 nightly = []
 
 # The `std` feature enables the use of the standard library. This is useful for
