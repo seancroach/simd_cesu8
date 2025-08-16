@@ -1,3 +1,5 @@
+//! A round-trip test on randomly generated strings.
+
 use dev_util::Bucket;
 
 #[test]
