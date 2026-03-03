@@ -1,10 +1,8 @@
 #![doc = include_str!("README.md")]
-#![cfg_attr(feature = "nightly", feature(portable_simd))]
-// NOTE: We use this to prevent false positives when using the nightly
-// toolchain.
-#![cfg_attr(feature = "nightly", allow(stable_features))]
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
+#![cfg_attr(feature = "nightly", feature(portable_simd))]
+#![allow(stable_features)]
 
 extern crate alloc;
 

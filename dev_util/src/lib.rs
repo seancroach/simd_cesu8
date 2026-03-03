@@ -4,7 +4,6 @@
 // because they are used in benchmarks, typical debug assertions would never
 // trigger.
 #![allow(clippy::missing_panics_doc)]
-#![feature(iter_intersperse)]
 
 extern crate alloc;
 
@@ -121,7 +120,8 @@ impl Bucket<String> {
             .map(|_| {
                 let bytes = (&mut rng)
                     .sample_iter(&ascii_dist)
-                    .intersperse(0x00)
+                    .enumerate()
+                    .map(|(i, n)| if i % 2 == 0 { 0x00 } else { n })
                     .take(Self::VALUE_SIZE)
                     .collect::<Vec<u8>>();
                 String::from_utf8(bytes).unwrap()
