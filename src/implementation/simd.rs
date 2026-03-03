@@ -10,7 +10,7 @@ pub fn contains_null_or_utf8_4_byte_char_header(value: &[u8]) -> bool {
 
     macro_rules! process {
         ($simd:ty) => {
-            let (array_chunks, array_remainder) = remainder.as_chunks::<{ <$simd>::LEN }>();
+            let (array_chunks, array_remainder) = as_chunks_simd::<{ <$simd>::LEN }>(remainder);
             remainder = array_remainder;
 
             let zero = <$simd>::splat(0x00);
