@@ -8,7 +8,7 @@ resolver = "2"
 
 [workspace.package]
 # Be sure to update the version number in `README.md`.
-version = "1.1.0"
+version = "1.1.1"
 authors = ["Sean C. Roach <me@seancroach.dev>"]
 edition = "2021"
 
@@ -72,15 +72,13 @@ name = "simd_cesu8"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
-rust-version = "1.88.0"
+rust-version = "1.85.0"
 description = "An extremely fast, SIMD accelerated, encoding and decoding library for CESU-8 and Modified UTF-8."
 homepage = "https://github.com/seancroach/simd_cesu8"
 repository = "https://github.com/seancroach/simd_cesu8"
 license = "Apache-2.0 OR MIT"
 keywords = ["cesu8", "decode", "encode", "mutf8", "no_std"]
 categories = ["encoding", "no-std"]
-
-build = "build.rs"
 
 ################################################################################
 # Lib
@@ -116,7 +114,6 @@ default = ["std"]
 bench = []
 
 # The `nightly` feature enables nightly-only features like `portable_simd`.
-# This is automatically enabled if the compiler is nightly.
 nightly = []
 
 # The `std` feature enables the use of the standard library. This is useful for

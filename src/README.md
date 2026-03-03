@@ -52,7 +52,7 @@ Items" button in the top left corner of the documentation page.
 
 ## MSRV
 
-The minimum supported Rust version is 1.88.0.
+The minimum supported Rust version is 1.85.0.
 
 ## Benchmarks
 
