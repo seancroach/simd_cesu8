@@ -198,8 +198,8 @@ fn decode_code_point(code_point: u32) -> [u8; 4] {
     ]
 }
 
-/// Encodes a string into a vector of bytes using the given flavor of encoding:
-/// CESU-8 or MUTF-8.
+/// Encodes a string into a new vector of bytes using the given flavor of
+/// encoding: CESU-8 or MUTF-8.
 ///
 /// NOTE: This function is inlined. It is expected that the call site of this
 /// function is **not** inlined. This is to ensure that LLVM elides the flavor
@@ -213,8 +213,27 @@ fn decode_code_point(code_point: u32) -> [u8; 4] {
 #[must_use]
 #[inline]
 pub(crate) fn encode(value: &str, flavor: Flavor) -> Vec<u8> {
+    let mut buf = Vec::new();
+    encode_into(value, flavor, &mut buf);
+    buf
+}
+
+/// Encodes a string into an existing vector of bytes using the given flavor of
+/// encoding: CESU-8 or MUTF-8.
+///
+/// NOTE: This function is inlined. It is expected that the call site of this
+/// function is **not** inlined. This is to ensure that LLVM elides the flavor
+/// logic when the flavor is known at compile time.
+///
+/// # Panics
+///
+/// If `value` is greater than <code>[isize::MAX] / 2</code> bytes long, this
+/// function might panic by trying to allocate a vector with a capacity greater
+/// than [`isize::MAX`] bytes.
+#[inline]
+pub(crate) fn encode_into(value: &str, flavor: Flavor, buf: &mut Vec<u8>) {
     let capacity = value.len().checked_mul(2).unwrap_or(ISIZE_MAX_USIZE);
-    let mut encoded = Vec::with_capacity(capacity);
+    buf.reserve(capacity);
 
     let bytes = value.as_bytes();
     let mut index = 0;
@@ -229,9 +248,9 @@ pub(crate) fn encode(value: &str, flavor: Flavor) -> Vec<u8> {
         // improved performance by over 80%.
         if first <= 0x7f {
             if flavor == Flavor::Mutf8 && first == 0x00 {
-                encoded.extend_from_slice(&[0xc0, 0x80]);
+                buf.extend_from_slice(&[0xc0, 0x80]);
             } else {
-                encoded.push(first);
+                buf.push(first);
             }
 
             index += 1;
@@ -239,13 +258,13 @@ pub(crate) fn encode(value: &str, flavor: Flavor) -> Vec<u8> {
             // SAFETY: We know that `bytes` is a valid UTF-8 string, so the
             // slice is guaranteed to be valid.
             let slice = unsafe { bytes.get_unchecked(index..index + 2) };
-            encoded.extend_from_slice(slice);
+            buf.extend_from_slice(slice);
             index += 2;
         } else if first <= 0xef {
             // SAFETY: We know that `bytes` is a valid UTF-8 string, so the
             // slice is guaranteed to be valid.
             let slice = unsafe { bytes.get_unchecked(index..index + 3) };
-            encoded.extend_from_slice(slice);
+            buf.extend_from_slice(slice);
             index += 3;
         } else {
             // SAFETY: We know that `bytes` is a valid UTF-8 string, so the
@@ -263,13 +282,11 @@ pub(crate) fn encode(value: &str, flavor: Flavor) -> Vec<u8> {
                 | u32::from(fourth & 0b0011_1111);
 
             let [s1, s2] = to_surrogate_pair(code_point);
-            encoded.extend_from_slice(&encode_surrogate(s1));
-            encoded.extend_from_slice(&encode_surrogate(s2));
+            buf.extend_from_slice(&encode_surrogate(s1));
+            buf.extend_from_slice(&encode_surrogate(s2));
             index += 4;
         }
     }
-
-    encoded
 }
 
 #[must_use]

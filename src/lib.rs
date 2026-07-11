@@ -454,6 +454,69 @@ pub fn encode(value: &str) -> Cow<'_, [u8]> {
     }
 }
 
+/// Encodes a string to CESU-8 into a provided vector of bytes.
+///
+/// The algorithm is as follows:
+///
+/// - If the input, as UTF-8, is also valid CESU-8, the function will copy the
+///   input into the buffer.
+/// - If the input, as UTF-8, is not valid CESU-8, the function will encode the
+///   input into the buffer. This case has the potential to panic.
+///
+/// # Panics
+///
+/// This function will panic if the total buffer, including any existing bytes,
+/// required to encode the input exceeds [`isize::MAX`] bytes.
+///
+/// # Examples
+///
+/// ```
+/// # extern crate alloc;
+/// use alloc::borrow::Cow;
+///
+/// let mut buf = Vec::new();
+///
+/// let single_byte = "\u{0045}";
+/// assert_eq!(single_byte, "E");
+/// assert_eq!(single_byte.len(), 1);
+/// assert_eq!(single_byte.as_bytes(), &[0x45]);
+/// simd_cesu8::encode_into(single_byte, &mut buf);
+/// assert_eq!(&buf, &[0x45]);
+/// buf.clear();
+///
+/// let two_bytes = "\u{0205}";
+/// assert_eq!(two_bytes, "ȅ");
+/// assert_eq!(two_bytes.len(), 2);
+/// assert_eq!(two_bytes.as_bytes(), &[0xc8, 0x85]);
+/// simd_cesu8::encode_into(two_bytes, &mut buf);
+/// assert_eq!(&buf, &[0xc8, 0x85]);
+/// buf.clear();
+///
+/// let three_bytes = "\u{20ac}";
+/// assert_eq!(three_bytes, "€");
+/// assert_eq!(three_bytes.len(), 3);
+/// assert_eq!(three_bytes.as_bytes(), &[0xe2, 0x82, 0xac]);
+/// simd_cesu8::encode_into(three_bytes, &mut buf);
+/// assert_eq!(&three_bytes, &[0xe2, 0x82, 0xac]);
+/// buf.clear();
+///
+/// let four_bytes = "\u{10400}";
+/// assert_eq!(four_bytes, "𐐀");
+/// assert_eq!(four_bytes.len(), 4);
+/// assert_eq!(four_bytes.as_bytes(), &[0xf0, 0x90, 0x90, 0x80]);
+/// simd_cesu8::encode_into(four_bytes, &mut buf);
+/// assert_eq!(&four_bytes, &[0xed, 0xa0, 0x81, 0xed, 0xb0, 0x80]);
+/// buf.clear();
+/// ```
+#[inline]
+pub fn encode_into(value: &str, buf: &mut Vec<u8>) {
+    if needs_encoded(value) {
+        internal::encode_into(value, Flavor::Cesu8, buf);
+    } else {
+        buf.extend_from_slice(value.as_bytes());
+    }
+}
+
 /// Returns `true` if the input string needs to be encoded to CESU-8.
 ///
 /// # Examples
