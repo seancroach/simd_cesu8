@@ -47,9 +47,6 @@ can remove the feature and the library will still work, but will be slower.
 
 The documentation can be found on [docs.rs](https://docs.rs/simd_cesu8).
 
-For quick access to certain functions, I highly recommend pressing the "All
-Items" button in the top left corner of the documentation page.
-
 ## MSRV
 
 The minimum supported Rust version is 1.85.0.
