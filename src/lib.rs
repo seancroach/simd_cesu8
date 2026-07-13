@@ -13,6 +13,7 @@ mod internal;
 pub mod mutf8;
 
 use alloc::borrow::Cow;
+use alloc::vec::Vec;
 
 use simdutf8::basic::from_utf8;
 
@@ -497,7 +498,7 @@ pub fn encode(value: &str) -> Cow<'_, [u8]> {
 /// assert_eq!(three_bytes.len(), 3);
 /// assert_eq!(three_bytes.as_bytes(), &[0xe2, 0x82, 0xac]);
 /// simd_cesu8::encode_into(three_bytes, &mut buf);
-/// assert_eq!(&three_bytes, &[0xe2, 0x82, 0xac]);
+/// assert_eq!(&buf, &[0xe2, 0x82, 0xac]);
 /// buf.clear();
 ///
 /// let four_bytes = "\u{10400}";
@@ -505,7 +506,7 @@ pub fn encode(value: &str) -> Cow<'_, [u8]> {
 /// assert_eq!(four_bytes.len(), 4);
 /// assert_eq!(four_bytes.as_bytes(), &[0xf0, 0x90, 0x90, 0x80]);
 /// simd_cesu8::encode_into(four_bytes, &mut buf);
-/// assert_eq!(&four_bytes, &[0xed, 0xa0, 0x81, 0xed, 0xb0, 0x80]);
+/// assert_eq!(&buf, &[0xed, 0xa0, 0x81, 0xed, 0xb0, 0x80]);
 /// buf.clear();
 /// ```
 #[inline]

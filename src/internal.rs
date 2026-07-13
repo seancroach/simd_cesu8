@@ -82,7 +82,7 @@ pub(crate) fn decode(bytes: &[u8], options: DecodeOptions) -> Result<String, Dec
     while processed < bytes.len() {
         // NOTE: `processed` should be equal to `index` at the start of each
         // iteration.
-        debug_assert!(index == processed);
+        debug_assert_eq!(index, processed);
         // SAFETY: We know that `index` is less than `bytes.len()` due to the
         // loop condition.
         let first = unsafe { *bytes.get_unchecked(processed) };
